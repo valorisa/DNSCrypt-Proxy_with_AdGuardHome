@@ -1,0 +1,20 @@
+.
+├── .git
+│   ├── COMMIT_EDITMSG
+│   ├── HEAD
+│   ├── branches
+│   ├── config
+│   ├── description
+│   ├── hooks
+│   ├── index
+│   ├── info
+│   ├── logs
+│   ├── objects
+│   └── refs
+├── .gitignore
+├── License
+├── README.md
+├── file_structure.txt
+└── installation_from_Windows.md
+
+8 directories, 10 files
