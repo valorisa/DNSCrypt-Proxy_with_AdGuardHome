@@ -3,17 +3,28 @@
 ![Project Banner](https://example.com/banner.jpg) *[Image: Illustration des flux DNS sécurisés]*
 
 ## 📌 Table des Matières
-- [Fonctionnalités Clés](#-fonctionnalités-clés)
-- [Prérequis](#-prérequis)
-- [🚀 Installation Automatisée](#-installation-automatisée)
-- [🛠 Installation Manuelle](#-installation-manuelle)
-- [⚙ Configuration Avancée](#-configuration-avancée)
-- [🔍 Vérification](#-vérification)
-- [❓ Dépannage](#-dépannage)
-- [📊 Monitoring](#-monitoring)
-- [🤖 Gestion Avancée](#-gestion-avancée)
-- [📜 Licence](#-licence)
-- [👥 Contribution](#-contribution)
+
+- [DNSCrypt-Proxy + AdGuardHome: Solution Complète de Sécurité DNS](#dnscrypt-proxy--adguardhome-solution-complète-de-sécurité-dns)
+  - [📌 Table des Matières](#-table-des-matières)
+  - [🌟 Fonctionnalités Clés](#-fonctionnalités-clés)
+  - [🧰 Prérequis](#-prérequis)
+    - [Pour macOS](#pour-macos)
+    - [Pour Windows](#pour-windows)
+  - [🚀 Installation Automatisée](#-installation-automatisée)
+    - [macOS/Linux](#macoslinux)
+    - [Windows](#windows)
+  - [🛠 Installation Manuelle](#-installation-manuelle)
+    - [1. DNSCrypt-Proxy](#1-dnscrypt-proxy)
+    - [2. AdGuardHome](#2-adguardhome)
+  - [⚙ Configuration Avancée](#-configuration-avancée)
+    - [Serveurs Recommandés](#serveurs-recommandés)
+    - [Filtres Optimisés](#filtres-optimisés)
+  - [🔍 Vérification](#-vérification)
+  - [❓ Dépannage](#-dépannage)
+  - [📊 Monitoring](#-monitoring)
+  - [🤖 Gestion Avancée](#-gestion-avancée)
+  - [📜 Licence](#-licence)
+  - [👥 Contribution](#-contribution)
 
 ## 🌟 Fonctionnalités Clés
 
@@ -28,6 +39,7 @@
 ## 🧰 Prérequis
 
 ### Pour macOS
+
 ```bash
 # Vérifier les prérequis
 brew --version || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -35,6 +47,7 @@ docker --version || brew install --cask docker
 ```
 
 ### Pour Windows
+
 ```powershell
 # En PowerShell (Admin)
 wsl --list || wsl --install
@@ -44,6 +57,7 @@ docker --version || winget install Docker.DockerDesktop
 ## 🚀 Installation Automatisée
 
 ### macOS/Linux
+
 ```bash
 # Installation en un clic
 bash <(curl -sSL https://raw.githubusercontent.com/yourrepo/main/install.sh) \
@@ -52,6 +66,7 @@ bash <(curl -sSL https://raw.githubusercontent.com/yourrepo/main/install.sh) \
 ```
 
 ### Windows
+
 ```powershell
 # Script PowerShell (Exécution en Admin)
 Set-ExecutionPolicy Bypass -Scope Process -Force
@@ -75,7 +90,9 @@ sudo curl -o /usr/local/etc/dnscrypt-proxy.toml \
 
 # Service
 brew services start dnscrypt-proxy
+
 ```
+
 </details>
 
 <details>
@@ -88,7 +105,9 @@ Expand-Archive -Path dnscrypt.zip -DestinationPath C:\dnscrypt-proxy
 
 # Configuration
 Copy-Item -Path "C:\dnscrypt-proxy\example-dnscrypt-proxy.toml" -Destination "C:\dnscrypt-proxy\dnscrypt-proxy.toml" -Force
+
 ```
+
 </details>
 
 ### 2. AdGuardHome
@@ -111,6 +130,7 @@ services:
 ## ⚙ Configuration Avancée
 
 ### Serveurs Recommandés
+
 ```toml
 # dnscrypt-proxy.toml
 [static]
@@ -119,6 +139,7 @@ services:
 ```
 
 ### Filtres Optimisés
+
 ```yaml
 # AdGuardHome.yaml
 filters:
@@ -163,6 +184,7 @@ Accéder à: `http://localhost:3001` (admin/admin)
 ## 🤖 Gestion Avancée
 
 Gérer les filtres dynamiquement:
+
 ```bash
 ./manage-filters.sh \
   --add https://filter.url \
@@ -193,7 +215,8 @@ Permission is hereby granted...
 > 💡 **Astuce**: Utilisez `make uninstall` pour une désinstallation complète.
 
 🔗 **Documentation supplémentaire**: [Wiki du projet](https://github.com/yourrepo/wiki)
-```
+
+```text
 
 ### Fonctionnalités Spéciales:
 1. **Tableaux Récapitulatifs** pour une lecture rapide
@@ -215,3 +238,4 @@ Ce README est conçu pour:
 - **Réduire les problèmes** grâce aux sections de dépannage
 - **Encourager les contributions** avec des directives claires
 - **Maximiser la maintenabilité** avec une structure modulaire
+```
