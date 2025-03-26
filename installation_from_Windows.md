@@ -21,6 +21,7 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur Windows 11 Ent
 
 3. **Configurer DNSCrypt-Proxy** :
    Modifiez le fichier de configuration `dnscrypt-proxy.toml` pour écouter sur l'adresse locale `127.0.0.1:5353`. Vous pouvez utiliser un éditeur de texte comme Notepad++ ou Visual Studio Code :
+
    ```toml
    listen_addresses = ['127.0.0.1:5353']
    max_clients = 250
@@ -39,6 +40,7 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur Windows 11 Ent
 
 5. **Démarrer DNSCrypt-Proxy** :
    - Ouvrez Git Bash ou Cygwin et exécutez la commande suivante pour démarrer DNSCrypt-Proxy :
+
    ```bash
    cd /cygdrive/c/dnscrypt-proxy
    ./dnscrypt-proxy.exe
@@ -51,6 +53,7 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur Windows 11 Ent
 
 2. **Créer un fichier de configuration pour AdGuardHome** :
    Créez un fichier `AdGuardHome.yaml` avec la configuration suivante :
+
    ```yaml
    bind_host: 0.0.0.0
    bind_port: 53
@@ -60,6 +63,7 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur Windows 11 Ent
 
 3. **Lancer AdGuardHome avec Docker** :
    Créez un fichier `docker-compose.yml` avec le contenu suivant :
+
    ```yaml
    version: '3'
 
@@ -80,6 +84,7 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur Windows 11 Ent
 
 4. **Démarrer le conteneur AdGuardHome** :
    - Ouvrez Git Bash ou Cygwin et exécutez la commande suivante :
+
    ```bash
    docker-compose up -d
    ```
@@ -98,18 +103,21 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur Windows 11 Ent
 
 1. **Vérifier que les services sont en cours d'exécution** :
    - Dans Git Bash ou Cygwin, exécutez :
+
    ```bash
    docker ps
    ```
 
 2. **Tester la Résolution DNS** :
    Utilisez la commande `nslookup` pour tester une requête DNS :
+
    ```bash
    nslookup example.com 127.0.0.1
    ```
 
 3. **Surveillance des Logs** :
    Utilisez Git Bash ou Cygwin pour surveiller les logs de DNSCrypt-Proxy :
+
    ```bash
    tail -f /cygdrive/c/dnscrypt-proxy/dnscrypt-proxy.log
    ```
