@@ -1,6 +1,6 @@
 # DNSCrypt-Proxy_with_AdGuardHome
 
-Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur macOS pour sécuriser et filtrer les requêtes DNS. 
+Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur macOS pour sécuriser et filtrer les requêtes DNS.
 
 ## Prérequis
 
@@ -13,17 +13,20 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur macOS pour sé
 ### Étape 1 : Installation de DNSCrypt-Proxy
 
 1. **Installer Homebrew**, si ce n'est pas déjà fait :
+  
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
 2. **Installer DNSCrypt-Proxy** :
+  
    ```bash
    brew install dnscrypt-proxy
    ```
 
 3. **Configurer DNSCrypt-Proxy** :
    Modifiez le fichier de configuration `dnscrypt-proxy.toml` pour écouter sur l'adresse locale `127.0.0.1:5353` :
+  
    ```toml
    listen_addresses = ['127.0.0.1:5353']
    max_clients = 250
@@ -38,6 +41,7 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur macOS pour sé
    ```
 
 4. **Démarrer DNSCrypt-Proxy** :
+  
    ```bash
    brew services start dnscrypt-proxy
    ```
@@ -49,6 +53,7 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur macOS pour sé
 
 2. **Créer un fichier de configuration pour AdGuardHome** :
    Créez un fichier `AdGuardHome.yaml` avec la configuration suivante :
+  
    ```yaml
    bind_host: 0.0.0.0
    bind_port: 53
@@ -58,6 +63,7 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur macOS pour sé
 
 3. **Lancer AdGuardHome avec Docker** :
    Créez un fichier `docker-compose.yml` avec le contenu suivant :
+  
    ```yaml
    version: '3'
 
@@ -77,6 +83,7 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur macOS pour sé
    ```
 
 4. **Démarrer le conteneur AdGuardHome** :
+  
    ```bash
    docker-compose up -d
    ```
@@ -94,6 +101,7 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur macOS pour sé
 ## Vérification de la Configuration
 
 1. **Vérifier que les services sont en cours d'exécution** :
+  
    ```bash
    brew services list
    docker ps
@@ -101,11 +109,13 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur macOS pour sé
 
 2. **Tester la Résolution DNS** :
    Utilisez la commande `dig` pour tester une requête DNS :
+
    ```bash
    dig example.com @127.0.0.1
    ```
 
 3. **Surveillance des Logs** :
+
    ```bash
    tail -f /usr/local/var/log/dnscrypt-proxy.log
    ```
