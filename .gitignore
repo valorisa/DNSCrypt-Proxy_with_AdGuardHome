@@ -1,0 +1,44 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore logs and temp files
+*.log
+*.tmp
+*.temp
+
+# Ignore Docker files
+docker-compose.override.yml
+docker-compose.debug.yml
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Ignore Cygwin specific files
+cygwin.bat
+cygwin.ico
+
+# Ignore Git Bash specific files
+.git-bash_profile
+
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore Visual Studio Code workspace files
+.vscode/
+
+# Ignore IDE directories
+.idea/
+*.iml
+
+# Ignore compiled binaries
+*.exe
+*.dll
+*.so
+*.dylib
