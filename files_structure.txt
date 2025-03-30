@@ -1,7 +1,9 @@
 .
 ├── .git
 │   ├── COMMIT_EDITMSG
+│   ├── FETCH_HEAD
 │   ├── HEAD
+│   ├── ORIG_HEAD
 │   ├── branches
 │   ├── config
 │   ├── description
@@ -12,9 +14,13 @@
 │   ├── objects
 │   └── refs
 ├── .gitignore
+├── AdGuardHome.yaml
+├── Dockerfile
 ├── License
 ├── README.md
-├── file_structure.txt
+├── dnscrypt-proxy.toml
+├── files_structure.txt
+├── installation_amelioree.md
 └── installation_from_Windows.md
 
-8 directories, 10 files
+8 directories, 16 files
