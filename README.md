@@ -160,7 +160,7 @@ La configuration principale d'AdGuard Home se fait via son interface web après 
 
 1.  **Vérifier que les conteneurs sont en cours d'exécution** :
     ```bash
-    docker ps
+    docker ps -as
     ```
     *(Vous devriez voir les conteneurs `adguard` et `dnscrypt`)*
 
