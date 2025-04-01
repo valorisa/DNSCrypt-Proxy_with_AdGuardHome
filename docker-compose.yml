@@ -1,52 +1,67 @@
-version: '3.8'
+version: '3.8' # Utilisez une version récente de la spécification Compose
 
 services:
-  # Service pour DNSCrypt-Proxy
+  # --- Service DNSCrypt-Proxy ---
   dnscrypt-proxy:
-    # Utilisez une image existante ou construisez la vôtre si nécessaire
-    image: klutchell/dnscrypt-proxy:latest # Exemple d'image communautaire populaire
-    container_name: dnscrypt
+    # Vous pouvez utiliser une image pré-construite populaire ou construire la vôtre.
+    # klutchell/dnscrypt-proxy est une image communautaire souvent utilisée.
+    image: klutchell/dnscrypt-proxy:latest
+    container_name: dnscrypt # Nom pratique pour le conteneur
+    restart: unless-stopped # Redémarre automatiquement sauf si arrêté manuellement
     volumes:
-      # Montez votre fichier de configuration local dans le conteneur
-      - ./dnscrypt-proxy.toml:/config/dnscrypt-proxy.toml:ro
-    # DNSCrypt doit écouter sur une adresse IP et un port accessibles par AdGuard
-    # Configurez dans dnscrypt-proxy.toml: listen_addresses = ['0.0.0.0:5353'] (par exemple)
-    # Pas besoin d'exposer le port à l'extérieur de Docker, sauf si accès direct souhaité
-    # expose:
-    #  - "5353/udp" # Expose uniquement sur le réseau interne Docker
-    restart: unless-stopped
-    command: ["-config", "/config/dnscrypt-proxy.toml"] # La commande dépend de l'image choisie
+      # Montez votre fichier de configuration local dans le conteneur.
+      # Le chemin /config est souvent utilisé par l'image klutchell. Vérifiez la doc de l'image si vous en utilisez une autre.
+      - ./dnscrypt-proxy.toml:/config/dnscrypt-proxy.toml:ro # 'ro' = read-only (lecture seule)
+      # Optionnel : Montez un volume pour le cache de dnscrypt si activé dans votre config
+      # - dnscrypt_cache:/var/cache/dnscrypt-proxy
+    # Pas besoin d'exposer de ports sur l'hôte pour dnscrypt-proxy,
+    # car seul AdGuard (dans le même réseau Docker) a besoin de le joindre.
+    # Assurez-vous que dnscrypt-proxy écoute sur une IP interne (ex: 0.0.0.0:5353) dans son fichier de config.
+    networks:
+      - dns-network # Attache le service à notre réseau défini plus bas
 
-  # Service pour AdGuard Home
+  # --- Service AdGuard Home ---
   adguardhome:
+    # Utilise l'image officielle AdGuard Home
     image: adguard/adguardhome:latest
-    container_name: adguard
+    container_name: adguard # Nom pratique pour le conteneur
+    restart: unless-stopped # Redémarre automatiquement
     ports:
-      # Ports DNS standard exposés sur l'hôte
+      # Port DNS standard (TCP et UDP) exposé sur votre machine hôte
       - "53:53/tcp"
       - "53:53/udp"
-      # Port pour l'interface web d'AdGuard, exposé sur l'hôte
+      # Port pour l'interface web d'AdGuard (accessible via http://<votre-ip>:3000)
       - "3000:3000/tcp"
-      # Ajoutez d'autres ports si vous utilisez DoT, DoH... (ex: 853, 443)
+      # --- Ports Optionnels ---
+      # Décommentez si vous configurez AdGuard pour DoT (DNS over TLS)
       # - "853:853/tcp"
+      # Décommentez si vous configurez AdGuard pour DoH (DNS over HTTPS) - Attention aux conflits si un serveur web tourne sur 443
       # - "443:443/tcp"
+      # - "443:443/udp" # Pour HTTP/3 (QUIC) si supporté et activé
+      # Port pour l'interface web sécurisée (si configurée)
+      # - "8443:8443/tcp" # Exemple de port alternatif pour HTTPS UI
+      # Port DHCP (si vous activez le serveur DHCP d'AdGuard - nécessite --net=host ou des privilèges spéciaux)
+      # - "67:67/udp"
+      # - "68:68/tcp"
+      # - "68:68/udp"
     volumes:
-      # Volume pour les données de travail d'AdGuard (logs, stats, cache...)
+      # Stockage persistant pour les données de travail d'AdGuard (logs, stats, etc.)
       - ./adguard_work:/opt/adguardhome/work
-      # Volume pour la configuration persistante d'AdGuard
+      # Stockage persistant pour la configuration d'AdGuard
       - ./adguard_conf:/opt/adguardhome/conf
-    # Indique qu'AdGuard dépend de dnscrypt-proxy pour démarrer après lui (optionnel mais bonne pratique)
+    # Dépendance : S'assure que dnscrypt-proxy est démarré avant AdGuard
     depends_on:
       - dnscrypt-proxy
-    restart: unless-stopped
-    # La commande est gérée par l'image AdGuard, pas besoin de la spécifier ici en général
+    networks:
+      - dns-network # Attache le service à notre réseau défini plus bas
 
-# (Optionnel) Définir les volumes explicitement si vous ne préférez pas les bind mounts locaux
+# --- Définition des Réseaux ---
+networks:
+  dns-network: # Nom du réseau interne utilisé par les conteneurs pour communiquer
+    driver: bridge # Type de réseau par défaut, suffisant ici
+
+# --- Définition des Volumes (Optionnel si vous utilisez les chemins locaux comme ci-dessus) ---
 # volumes:
+#   dnscrypt_cache: # Si vous avez activé le volume de cache pour dnscrypt
 #   adguard_work:
 #   adguard_conf:
-
-# (Optionnel) Nommer le réseau Docker utilisé
-networks:
-  default:
-    name: reseau-dns
