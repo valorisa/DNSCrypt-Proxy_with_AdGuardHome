@@ -1,20 +1,25 @@
 .
 ├── .git
-│   ├── COMMIT_EDITMSG                      │   ├── FETCH_HEAD
-│   ├── HEAD
-│   ├── ORIG_HEAD
-│   ├── branches
-│   ├── config
-│   ├── description
-│   ├── hooks
-│   ├── index
-│   ├── info
-│   ├── logs                                │   ├── objects
-│   ├── packed-refs
-│   └── refs                                ├── .gitignore
-├── AdGuardHome.yaml                        ├── License                                 ├── README.md
+│   ├── COMMIT_EDITMSG
+│   ├── FETCH_HEAD
+│   ├── HEAD
+│   ├── ORIG_HEAD
+│   ├── config
+│   ├── description
+│   ├── hooks
+│   ├── index
+│   ├── info
+│   ├── logs
+│   ├── objects
+│   ├── packed-refs
+│   └── refs
+├── .gitignore
+├── AdGuardHome.yaml
+├── License
+├── README.md
 ├── dnscrypt-proxy.toml
-├── docker-compose.yml                      ├── files_structure.txt
-├── installation_amelioree.md               └── installation_from_Windows.md
+├── docker-compose.yml
+├── files_structure.txt
+└── installation_from_Windows.md
 
-8 directories, 17 files
+7 directories, 16 files
