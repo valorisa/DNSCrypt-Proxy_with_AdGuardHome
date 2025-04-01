@@ -1,4 +1,3 @@
-```markdown
 # DNSCrypt-Proxy_with_AdGuardHome
 
 Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur Windows 11 Enterprise pour sécuriser et filtrer les requêtes DNS.
@@ -126,4 +125,3 @@ Ce projet configure DNSCrypt-Proxy en tandem avec AdGuardHome sur Windows 11 Ent
 ## Conclusion
 
 En suivant ces étapes, vous aurez configuré DNSCrypt-Proxy et AdGuardHome sur Windows 11 Enterprise pour sécuriser et filtrer vos requêtes DNS. Si vous avez des questions ou rencontrez des problèmes, n'hésitez pas à demander de l'aide.
-```
