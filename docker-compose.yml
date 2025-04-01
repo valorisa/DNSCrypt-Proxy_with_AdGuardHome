@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # Service pour DNSCrypt-Proxy
+  dnscrypt-proxy:
+    # Utilisez une image existante ou construisez la vôtre si nécessaire
+    image: klutchell/dnscrypt-proxy:latest # Exemple d'image communautaire populaire
+    container_name: dnscrypt
+    volumes:
+      # Montez votre fichier de configuration local dans le conteneur
+      - ./dnscrypt-proxy.toml:/config/dnscrypt-proxy.toml:ro
+    # DNSCrypt doit écouter sur une adresse IP et un port accessibles par AdGuard
+    # Configurez dans dnscrypt-proxy.toml: listen_addresses = ['0.0.0.0:5353'] (par exemple)
+    # Pas besoin d'exposer le port à l'extérieur de Docker, sauf si accès direct souhaité
+    # expose:
+    #  - "5353/udp" # Expose uniquement sur le réseau interne Docker
+    restart: unless-stopped
+    command: ["-config", "/config/dnscrypt-proxy.toml"] # La commande dépend de l'image choisie
+
+  # Service pour AdGuard Home
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguard
+    ports:
+      # Ports DNS standard exposés sur l'hôte
+      - "53:53/tcp"
+      - "53:53/udp"
+      # Port pour l'interface web d'AdGuard, exposé sur l'hôte
+      - "3000:3000/tcp"
+      # Ajoutez d'autres ports si vous utilisez DoT, DoH... (ex: 853, 443)
+      # - "853:853/tcp"
+      # - "443:443/tcp"
+    volumes:
+      # Volume pour les données de travail d'AdGuard (logs, stats, cache...)
+      - ./adguard_work:/opt/adguardhome/work
+      # Volume pour la configuration persistante d'AdGuard
+      - ./adguard_conf:/opt/adguardhome/conf
+    # Indique qu'AdGuard dépend de dnscrypt-proxy pour démarrer après lui (optionnel mais bonne pratique)
+    depends_on:
+      - dnscrypt-proxy
+    restart: unless-stopped
+    # La commande est gérée par l'image AdGuard, pas besoin de la spécifier ici en général
+
+# (Optionnel) Définir les volumes explicitement si vous ne préférez pas les bind mounts locaux
+# volumes:
+#   adguard_work:
+#   adguard_conf:
+
+# (Optionnel) Nommer le réseau Docker utilisé
+networks:
+  default:
+    name: reseau-dns
