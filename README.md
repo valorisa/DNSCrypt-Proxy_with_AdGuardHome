@@ -19,7 +19,7 @@ Vos Appareils --> AdGuard Home (Docker) --> DNSCrypt-Proxy (Docker) --> Résolve
 ## Mise en Place
 
 1.  **Cloner le dépôt ou créer les fichiers :**
-    Si vous avez cloné ce dépôt, les fichiers nécessaires sont déjà présents. Sinon, créez les fichiers suivants dans un nouveau dossier (par exemple `mon-dns`) :
+    Si vous avez cloné ce dépôt, les fichiers nécessaires sont déjà présents. Sinon, créez les fichiers suivants dans un nouveau dossier (par exemple `DNSCrypt-Proxy`) :
     *   `docker-compose.yml` (voir contenu ci-dessous)
     *   `dnscrypt-proxy.toml` (fichier de configuration pour DNSCrypt-Proxy)
 
