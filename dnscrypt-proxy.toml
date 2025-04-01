@@ -1,0 +1,10 @@
+listen_addresses = ['127.0.0.1:5353']
+max_clients = 250
+ipv4_servers = true
+ipv6_servers = false
+dnscrypt_servers = true
+doh_servers = true
+require_dnssec = true
+require_no_log = true
+require_nofilter = true
+log_file = '/usr/local/var/log/dnscrypt-proxy.log'
