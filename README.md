@@ -139,7 +139,7 @@ La configuration principale d'AdGuard Home se fait via son interface web après 
     - Dans la section **Serveurs DNS en amont**, **supprimez toutes les entrées par défaut**.
     - **Ajoutez** l'adresse suivante, en remplaçant `5353` par le port que vous avez défini dans `dnscrypt-proxy.toml` si vous en avez choisi un autre :
   
-        ```toml
+        ```text
         dnscrypt-proxy:5353
         ```
   
