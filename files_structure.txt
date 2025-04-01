@@ -1,7 +1,6 @@
 .
 ├── .git
-│   ├── COMMIT_EDITMSG
-│   ├── FETCH_HEAD
+│   ├── COMMIT_EDITMSG                      │   ├── FETCH_HEAD
 │   ├── HEAD
 │   ├── ORIG_HEAD
 │   ├── branches
@@ -10,17 +9,12 @@
 │   ├── hooks
 │   ├── index
 │   ├── info
-│   ├── logs
-│   ├── objects
-│   └── refs
-├── .gitignore
-├── AdGuardHome.yaml
-├── Dockerfile
-├── License
-├── README.md
+│   ├── logs                                │   ├── objects
+│   ├── packed-refs
+│   └── refs                                ├── .gitignore
+├── AdGuardHome.yaml                        ├── License                                 ├── README.md
 ├── dnscrypt-proxy.toml
-├── files_structure.txt
-├── installation_amelioree.md
-└── installation_from_Windows.md
+├── docker-compose.yml                      ├── files_structure.txt
+├── installation_amelioree.md               └── installation_from_Windows.md
 
-8 directories, 16 files
+8 directories, 17 files
